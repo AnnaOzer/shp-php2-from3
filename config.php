@@ -1,10 +1,10 @@
 <?php
 
-return [
-    ['db'] => [
+return ['db' =>
+    [
         'host' => 'localhost',
         'user' => 'root',
         'password' => '',
         'dbname' => 'shp-php2-2',
-    ];
+    ],
 ];
