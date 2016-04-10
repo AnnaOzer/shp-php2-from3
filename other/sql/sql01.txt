@@ -11,3 +11,11 @@ VALUES ('Вторая статья', 'Текст второй статьи');
 SELECT * FROM `articles`;
 
 SELECT * FROM `articles` WHERE `id` = 1;
+
+CREATE TABLE `newsarticles` (`id` SERIAL, `title` VARCHAR(255), `text` TEXT);
+
+INSERT INTO `newsarticles` (`title`, `text`)
+VALUES ('Первая новостная статья', 'Текст первой новостной статьи');
+
+INSERT INTO `newsarticles` (`title`, `text`)
+VALUES ('Вторая новостная статья', 'Текст второй новостной статьи');

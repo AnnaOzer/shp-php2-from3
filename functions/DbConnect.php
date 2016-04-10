@@ -4,7 +4,7 @@ require_once __DIR__ . '/Getconfig.php';
 
 class DbConnect
 {
-    protected $config;
+    private $config;
 
     public function dbQuery($sql)
     {
