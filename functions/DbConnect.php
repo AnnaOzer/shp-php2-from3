@@ -6,6 +6,36 @@ class DbConnect
 {
     protected $config;
 
+    public function dbQuery($sql)
+    {
+        $res = mysql_query($sql);
+        if(!$res) {
+            echo mysql_error();
+            return [];
+        }
+        $ret = [];
+        while ($row = mysql_fetch_assoc($res))
+        {
+            $ret[] = $row;
+        }
+        return $ret;
+    }
+
+    public function dbQueryOne($sql)
+    {
+        return $this->dbQuery($sql)[0];
+    }
+
+    public function dbExec($sql)
+    {
+        $res = mysql_query($sql);
+        if(false === $res) {
+            return false;
+        }
+        return true;
+    }
+
+
     public function __construct()
     {
         $getConfig = new GetConfig;
@@ -24,5 +54,3 @@ class DbConnect
     }
 }
 
-$connection = new DbConnect();
-var_dump($connection);
