@@ -16,7 +16,7 @@ abstract class Article
 
     abstract public function getOne($id);
 
-    abstract public function insertOne();
+    abstract public function insertOne($item);
 
     abstract public function updateOne($params);
 }
@@ -29,9 +29,11 @@ class NewsArticle
         return $this->db->dbQueryOne("SELECT * FROM `newsarticles` WHERE `id`=" . $id . ";");
     }
 
-    public function insertOne()
+    public function insertOne($item)
     {
-        // TODO: Implement insertOne() method.
+        return $this->db->dbExec("
+          INSERT INTO `newsarticles` (`title`, `text`)
+          VALUES ('" . $item['title'] . "', '" . $item['text'] . "');");
     }
 
     public function updateOne($params)
@@ -42,4 +44,4 @@ class NewsArticle
 
 $st = new NewsArticle();
 var_dump($st);
-var_dump($st->getOne(2));
+var_dump($st->insertOne(['title' => 'Четвёртая новостная статья', 'text' => 'Текст четвёртой новостной статьи',]));
