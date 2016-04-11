@@ -14,6 +14,7 @@
         </header>
         <div><?php echo $newsarticle['text']; ?>
             <a href="/controllers/update_newsarticle.php?id=<?php echo $newsarticle['id']; ?>">[Редактировать]</a>
+            <a href="/controllers/show_one_newsarticle.php?id=<?php echo $newsarticle['id']; ?>">[Показывать одну эту новость]</a>
         </div>
     </article>
 <?php endforeach; ?>
