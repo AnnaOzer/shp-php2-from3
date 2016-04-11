@@ -12,7 +12,9 @@
             <h1><?php echo $newsarticle['title']; ?></h1>
             <h3><?php echo $newsarticle['author']; ?></h3>
         </header>
-        <div><?php echo $newsarticle['text']; ?></div>
+        <div><?php echo $newsarticle['text']; ?>
+            <a href="/controllers/update_newsarticle.php?id=<?php echo $newsarticle['id']; ?>">[Редактировать]</a>
+        </div>
     </article>
 <?php endforeach; ?>
 </body>
