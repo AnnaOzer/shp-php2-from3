@@ -18,7 +18,7 @@ abstract class Article
 
     abstract public function insertOne($item);
 
-    abstract public function updateOne($params);
+    abstract public function updateOne($item);
 }
 
 class NewsArticle
@@ -36,12 +36,17 @@ class NewsArticle
           VALUES ('" . $item['title'] . "', '" . $item['text'] . "');");
     }
 
-    public function updateOne($params)
+    public function updateOne($item)
     {
-        // TODO: Implement updateOne() method.
-    }
+        return $this->db->dbExec("
+          UPDATE `newsarticles` SET `title`='" . $item['title'] ."', `text`='" . $item['text'] ."'
+           WHERE id=" . $item['id']);
+/*
+        UPDATE  `newsarticles` SET  `title` =  'Четвёртая новостная интересная статья' WHERE  `newsarticles`.`id` =4;
+
+  */  }
 }
 
 $st = new NewsArticle();
 var_dump($st);
-var_dump($st->insertOne(['title' => 'Четвёртая новостная статья', 'text' => 'Текст четвёртой новостной статьи',]));
+var_dump($st->updateOne(['title' => 'Четвёртая вот новостная статья', 'text' => 'Текст четвёртой вот новостной статьи', 'id' => 4,]));
