@@ -24,6 +24,8 @@ abstract class Article
 class NewsArticle
     extends Article
 {
+    public $author;
+
     public function getOne($id)
     {
         return $this->db->dbQueryOne("SELECT * FROM `newsarticles` WHERE `id`=" . $id . ";");
@@ -32,14 +34,14 @@ class NewsArticle
     public function insertOne($item)
     {
         return $this->db->dbExec("
-          INSERT INTO `newsarticles` (`title`, `text`)
-          VALUES ('" . $item['title'] . "', '" . $item['text'] . "');");
+          INSERT INTO `newsarticles` (`title`, `text`, `author`)
+          VALUES ('" . $item['title'] . "', '" . $item['text'] . "', '" . $item['author'] . "');");
     }
 
     public function updateOne($item)
     {
         return $this->db->dbExec("
-          UPDATE `newsarticles` SET `title`='" . $item['title'] ."', `text`='" . $item['text'] ."'
+          UPDATE `newsarticles` SET `title`='" . $item['title'] ."', `text`='" . $item['text'] ."', `author`='" . $item['author'] ."'
            WHERE id=" . $item['id']);
     }
 
@@ -49,5 +51,5 @@ class NewsArticle
 }
 
 $st = new NewsArticle();
+$st->db->dbExec("ALTER TABLE  `newsarticles` ADD  `author` VARCHAR( 100 );");
 
-var_dump($st->getAll());

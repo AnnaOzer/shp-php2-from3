@@ -19,3 +19,5 @@ VALUES ('Первая новостная статья', 'Текст первой
 
 INSERT INTO `newsarticles` (`title`, `text`)
 VALUES ('Вторая новостная статья', 'Текст второй новостной статьи');
+
+ALTER TABLE  `newsarticles` ADD  `author` VARCHAR( 100 );
