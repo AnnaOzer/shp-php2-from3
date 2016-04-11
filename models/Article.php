@@ -41,12 +41,13 @@ class NewsArticle
         return $this->db->dbExec("
           UPDATE `newsarticles` SET `title`='" . $item['title'] ."', `text`='" . $item['text'] ."'
            WHERE id=" . $item['id']);
-/*
-        UPDATE  `newsarticles` SET  `title` =  'Четвёртая новостная интересная статья' WHERE  `newsarticles`.`id` =4;
+    }
 
-  */  }
+    public function getAll() {
+        return $this->db->dbQuery("SELECT * FROM `newsarticles`");
+    }
 }
 
 $st = new NewsArticle();
-var_dump($st);
-var_dump($st->updateOne(['title' => 'Четвёртая вот новостная статья', 'text' => 'Текст четвёртой вот новостной статьи', 'id' => 4,]));
+
+var_dump($st->getAll());
