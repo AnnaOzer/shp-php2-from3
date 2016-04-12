@@ -1,10 +1,28 @@
 <?php
 
-/*
-создали класс
-чтобы иметь возможность задавать любые свойства объектам этого класса,
-даже не описанные
-*/
+interface IModel {
+    public function getAll();
+    public function getOne($id);
+}
+
+class NewsModel
+    implements Imodel
+{
+
+    public function getAll()
+    {
+        echo 'Get all news!';
+    }
+
+    public function getOne($id)
+    {
+        echo 'Get one article #' .  $id;
+    }
+}
+
+$model =new NewsModel();
+$model->getAll();
+
 class Storage
 {
     // в этом свойстве будем хранить все необъявленные свойства
@@ -20,19 +38,7 @@ class Storage
     // вызывается при попытке чтения необъявленных свойств
     public function __get($key)
     {
-        if(isset($this->__data[$key])) {
-            return $this->__data[$key];
-        } else {
-            echo 'Error';
-        }
+        return $this->__data[$key];
     }
 }
 
-$st = new Storage();
-$st->foo = 'foo1';
-$st->bar = 'bar11';
-
-echo $st->foo;
-echo $st->bar;
-
-var_dump($st->zoo); // null
