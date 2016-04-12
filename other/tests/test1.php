@@ -6,8 +6,6 @@ interface IModel {
 }
 
 interface IHasAuthor {
-    public function getAll();
-    public function getOne($id);
     public function getAuthor();
 }
 class NewsModel
@@ -29,6 +27,15 @@ class NewsModel
         echo 'Лев Толстой';
     }
 }
+
+function statAuthors(IHasAuthor $obj)
+{
+
+}
+
+
+
+
 
 $model =new NewsModel();
 $model->getAll();
