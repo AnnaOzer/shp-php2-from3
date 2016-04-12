@@ -20,7 +20,11 @@ class Storage
     // вызывается при попытке чтения необъявленных свойств
     public function __get($key)
     {
-        return $this->__data[$key];
+        if(isset($this->__data[$key])) {
+            return $this->__data[$key];
+        } else {
+            echo 'Error';
+        }
     }
 }
 
@@ -30,3 +34,5 @@ $st->bar = 'bar11';
 
 echo $st->foo;
 echo $st->bar;
+
+var_dump($st->zoo); // null
