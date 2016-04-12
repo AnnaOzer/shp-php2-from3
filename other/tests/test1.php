@@ -6,6 +6,8 @@ interface IModel {
 }
 
 interface IHasAuthor {
+    public function getAll();
+    public function getOne($id);
     public function getAuthor();
 }
 class NewsModel
