@@ -5,8 +5,11 @@ interface IModel {
     public function getOne($id);
 }
 
+interface IHasAuthor {
+    public function getAuthor();
+}
 class NewsModel
-    implements Imodel
+    implements Imodel, IHasAuthor
 {
 
     public function getAll()
@@ -18,10 +21,18 @@ class NewsModel
     {
         echo 'Get one article #' .  $id;
     }
+
+    public function getAuthor()
+    {
+        echo 'Лев Толстой';
+    }
 }
 
 $model =new NewsModel();
 $model->getAll();
+$model->getAuthor();
+
+
 
 class Storage
 {
