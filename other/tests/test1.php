@@ -59,4 +59,7 @@ $st->foo = 1123;
 $st->bar = 456;
 $st->baz = 789;
 
-echo count($st);
+foreach ($st as $name => $value) {
+    echo $name . '=' . $value;
+    echo '<br/>';
+}
