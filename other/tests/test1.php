@@ -46,12 +46,16 @@ class Storage
     {
         return $this->__data[$key];
     }
+
+    public function countData()
+    {
+        return count($this->__data);
+    }
 }
 
 $st = new Storage();
 $st->foo = 1123;
 $st->bar = 456;
-$st->baя = 789;
+$st->baz = 789;
 
-echo count($st); // 1
-echo count($st->__data); // 0, так как приватное свойство
+echo $st->countData(); // 3, сработает, но это нестандартно
