@@ -30,6 +30,7 @@ class NewsModel
 
 
 class Storage
+    implements Countable
 {
     // в этом свойстве будем хранить все необъявленные свойства
     private $__data = [];
@@ -47,7 +48,7 @@ class Storage
         return $this->__data[$key];
     }
 
-    public function countData()
+    public function count()
     {
         return count($this->__data);
     }
@@ -58,4 +59,4 @@ $st->foo = 1123;
 $st->bar = 456;
 $st->baz = 789;
 
-echo $st->countData(); // 3, сработает, но это нестандартно
+echo count($st);
