@@ -28,20 +28,6 @@ class NewsModel
     }
 }
 
-function statAuthors(IHasAuthor $obj)
-{
-
-}
-
-
-
-
-
-$model =new NewsModel();
-$model->getAll();
-$model->getAuthor();
-
-
 
 class Storage
 {
@@ -62,3 +48,10 @@ class Storage
     }
 }
 
+$st = new Storage();
+$st->foo = 1123;
+$st->bar = 456;
+$st->baя = 789;
+
+echo count($st); // 1
+echo count($st->__data); // 0, так как приватное свойство
