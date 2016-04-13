@@ -31,15 +31,9 @@ class Storage
         next($this->__data);
     }
 
-    /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Return the key of the current element
-     * @link http://php.net/manual/en/iterator.key.php
-     * @return mixed scalar on success, or null on failure.
-     */
     public function key()
     {
-        // TODO: Implement key() method.
+        return key($this->__data);
     }
 
     /**
@@ -51,7 +45,7 @@ class Storage
      */
     public function valid()
     {
-        // TODO: Implement valid() method.
+
     }
 
     /**
@@ -77,4 +71,6 @@ echo $st->count(); // 3
 echo $st->current(); // bar
 $st->next();
 echo $st->current(); // bar2
+
+echo $st->key(); // foo2
 
