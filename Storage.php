@@ -36,16 +36,12 @@ class Storage
         return key($this->__data);
     }
 
-    /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Checks if current position is valid
-     * @link http://php.net/manual/en/iterator.valid.php
-     * @return boolean The return value will be casted to boolean and then evaluated.
-     * Returns true on success or false on failure.
-     */
     public function valid()
     {
-
+        if(null===$this->key()) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -74,3 +70,8 @@ echo $st->current(); // bar2
 
 echo $st->key(); // foo2
 
+var_dump($st->valid()); //true указатель на втором элементе массива
+$st->next();
+var_dump($st->valid()); // true указатель на третьем элементе массива
+$st->next();
+var_dump($st->valid()); // false указатель вышел за пределы массива
