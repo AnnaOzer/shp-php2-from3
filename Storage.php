@@ -52,7 +52,7 @@ class Storage
      */
     public function rewind()
     {
-        // TODO: Implement rewind() method.
+        reset($this->__data);
     }
 }
 
@@ -75,3 +75,6 @@ $st->next();
 var_dump($st->valid()); // true указатель на третьем элементе массива
 $st->next();
 var_dump($st->valid()); // false указатель вышел за пределы массива
+
+$st->rewind();
+echo $st->key(); // foo это ключ первого элемента
