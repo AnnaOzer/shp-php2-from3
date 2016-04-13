@@ -44,12 +44,6 @@ class Storage
         return true;
     }
 
-    /**
-     * (PHP 5 &gt;= 5.0.0)<br/>
-     * Rewind the Iterator to the first element
-     * @link http://php.net/manual/en/iterator.rewind.php
-     * @return void Any returned value is ignored.
-     */
     public function rewind()
     {
         reset($this->__data);
