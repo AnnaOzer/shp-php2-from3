@@ -38,7 +38,7 @@ class Storage
 
     public function valid()
     {
-        if(null===$this->key()) {
+        if(null===key($this->__data)) {
             return false;
         }
         return true;
