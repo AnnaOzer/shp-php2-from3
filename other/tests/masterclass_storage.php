@@ -1,6 +1,7 @@
 <?php
 
 class Storage
+    implements Countable
 {
     protected $data;
 
@@ -12,6 +13,11 @@ class Storage
     public function __get($k)
     {
         return $this->data[$k];
+    }
+
+    public function count()
+    {
+        return count($this->data);
     }
 }
 
@@ -34,7 +40,7 @@ assert ('123' == $obj->foo); // автоматический тест
 - и этот подсчет должен выдавать то количетво свойств, которое мы раньше установили
 */
 
-assert(3 == count($obj));
+assert(3 == count($obj)); // пройден
 
 /*
 - ожидаю, что я смогу по объекту этого класса как по массиву пройтись с помощью foreach
