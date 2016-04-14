@@ -54,6 +54,7 @@ $st->foo3 = 'bar3';
 
 echo $st->foo; // bar
 echo $st->count(); // 3
+assert( 3 == $st->count()); // если не выдаёт ошибку то тест пройден
 
 echo $st->current(); // bar
 $st->next();
