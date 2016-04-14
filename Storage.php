@@ -38,10 +38,7 @@ class Storage
 
     public function valid()
     {
-        if(null===key($this->__data)) {
-            return false;
-        }
-        return true;
+        return null !== key($this->__data);
     }
 
     public function rewind()
