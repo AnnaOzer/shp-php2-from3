@@ -70,3 +70,13 @@ var_dump($st->valid()); // false указатель вышел за предел
 
 $st->rewind();
 echo $st->key(); // foo это ключ первого элемента
+
+echo '<br>';
+// тест на foreach
+$i=0;
+foreach($st as $key=>$value) {
+    echo $key . ' = ' . $value;
+    echo '<br>';
+    $i++;
+}
+assert(3 == $i);
