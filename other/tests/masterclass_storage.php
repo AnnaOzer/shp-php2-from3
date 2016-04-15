@@ -192,6 +192,7 @@ class View
      * */
     public function display($template)
     {
+        $articles = $this->articles;
         include $template;
     }
 }
