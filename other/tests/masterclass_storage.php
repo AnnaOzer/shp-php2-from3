@@ -59,12 +59,15 @@ class Storage
 - чтобы особенности реализации этого были скрыты внутри нашего класса
 
  * */
+
+/***
 $obj = new Storage();
 $obj->foo = '123';
 $obj->bar = '456';
 $obj->baz = [1, 2, 3];
 
 assert ('123' == $obj->foo); // автоматический тест
+***/
 
 /*
 - хотим, чтобы наш класс вёл себя наподобие массива
@@ -72,7 +75,9 @@ assert ('123' == $obj->foo); // автоматический тест
 - и этот подсчет должен выдавать то количетво свойств, которое мы раньше установили
 */
 
+/***
 assert(3 == count($obj)); // пройден
+ ***/
 
 /*
 - ожидаю, что я смогу по объекту этого класса как по массиву пройтись с помощью foreach
@@ -80,10 +85,12 @@ assert(3 == count($obj)); // пройден
 пишем для проверки этого такой визуальный тест
  * */
 
+/***
 foreach ($obj as $key => $val) {
     echo $key . ' = ' . $val;
     echo '<br />';
 }
+ ***/
 
 /*
 Полезно сразу писать тесты для своих классов.
@@ -120,6 +127,7 @@ test driven development = TDD
 Напишем функцию addAuthor
  * */
 
+/***
 function addAuthor1($data)
 {
     $data['author'] = 'Игорь Петров';
@@ -131,11 +139,13 @@ $data = ['foo'=>'bar'];
 $data = addAuthor1($data);
 
 var_dump($data); // сработало
+***/
 
 /*
 С объектами иначе.
 */
 
+/***
 function addAuthor2($data)
 {
     $data->author = 'Игорь Петров';
@@ -144,6 +154,8 @@ function addAuthor2($data)
 $data = new Storage();
 $data->foo = 'bar';
 addAuthor2($data);
+***/
+
 
 /*
  * !!!
@@ -171,3 +183,22 @@ addAuthor2($data);
  *
  *
  * */
+
+class View
+    extends Storage
+{
+    /*
+     * упрощение: без конструктора, без задания пути, без буферизации
+     * */
+    public function display($template)
+    {
+        include $template;
+    }
+}
+
+$view = new View();
+$view->articles = [
+    ['title'=>'Первая новость', 'text'=>'Текст первой новости'],
+    ['title'=>'Вторая новость', 'text'=>'Текст второй новости'],
+];
+$view->display('view_mcstorage.php');
