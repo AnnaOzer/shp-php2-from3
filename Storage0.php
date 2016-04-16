@@ -1,6 +1,6 @@
 <?php
 
-class Storage
+class Storage0
     implements Countable, Iterator
 {
     private $__data = [];
@@ -47,7 +47,7 @@ class Storage
     }
 }
 
-$st = new Storage();
+$st = new Storage0();
 $st->foo = 'bar';
 $st->foo2 = 'bar2';
 $st->foo3 = 'bar3';

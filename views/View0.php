@@ -1,10 +1,10 @@
 <?php
 
-require_once __DIR__ . '/../Storage.php';
+require_once __DIR__ . '/../Storage0.php';
 require_once __DIR__ . '/../models/Article.php';
 
-class View
-    extends Storage
+class View0
+    extends Storage0
 {
     public $dirTemplates;
 
@@ -27,7 +27,7 @@ class View
     }
 }
 
-$view = new View(__DIR__ . '/templates');
+$view = new View0(__DIR__ . '/templates');
 /*
  * Путь получения текстов статей через заглушку
 $view->articles = [
