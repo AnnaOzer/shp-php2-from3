@@ -1,7 +1,7 @@
 <?php
-/*
- *@var array $articles Список всех новостей
- **/
+/**
+ * @var array $articles Список всех новостей
+ */
 ?>
 <!DOCTYPE html>
 <html>
