@@ -49,7 +49,8 @@ class NewsArticle
         return $this->db->dbQuery("SELECT * FROM `newsarticles`");
     }
 }
-
+/*
 $st = new NewsArticle();
 $st->db->dbExec("ALTER TABLE  `newsarticles` ADD  `author` VARCHAR( 100 );");
 
+*/
