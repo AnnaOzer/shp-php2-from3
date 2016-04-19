@@ -5,7 +5,7 @@ require 'boot.php';
 // r=news/all
 
 // начало роутера
-$route = $_GET['r'];
+$route = $_GET['r']; // код упрощён, проверок нет
 $routeParts = explode('/', $route);
 $controllerClassName = ucfirst($routeParts[0]).'Controller';
 $actionName= $routeParts[1];

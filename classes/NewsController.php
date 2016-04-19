@@ -13,4 +13,14 @@ class NewsController
         // $view->display(__DIR__ . '/views/add_newsarticle_form.php');
 
     }
+
+    protected function actionOne()
+    {
+        $newsArticle = new NewsArticle();
+        $view = new View();
+        $view->one_newsarticle = $newsArticle->getOne($_GET['id']);
+
+        $view->display('views/one_newsarticle.php');
+
+    }
 } 
