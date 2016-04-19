@@ -1,7 +1,5 @@
 <?php
 
-
-
 class NewsController
     extends AController
 {
