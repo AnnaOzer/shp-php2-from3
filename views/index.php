@@ -14,7 +14,7 @@
         </header>
         <div><?php echo $newsarticle['text']; ?>
             <a href="/?r=news/one&id=<?php echo $newsarticle['id']; ?>">[Показывать одну эту новость]</a>
-
+            <a href="/?r=news/edit&id=<?php echo $newsarticle['id']; ?>">[Редактировать эту новость]</a>
         </div>
     </article>
 <?php endforeach; ?>
