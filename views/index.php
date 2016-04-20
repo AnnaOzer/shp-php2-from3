@@ -13,8 +13,8 @@
             <h3><?php echo $newsarticle['author']; ?></h3>
         </header>
         <div><?php echo $newsarticle['text']; ?>
-            <a href="/controllers/update_newsarticle.php?id=<?php echo $newsarticle['id']; ?>">[Редактировать]</a>
-            <a href="/controllers/show_one_newsarticle.php?id=<?php echo $newsarticle['id']; ?>">[Показывать одну эту новость]</a>
+            <a href="/?r=news/one&id=<?php echo $newsarticle['id']; ?>">[Показывать одну эту новость]</a>
+
         </div>
     </article>
 <?php endforeach; ?>

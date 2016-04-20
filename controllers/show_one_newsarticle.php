@@ -1,6 +1,5 @@
 <?php
 
-require_once '../models/Article.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
