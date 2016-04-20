@@ -1,11 +1,15 @@
 <?php
 
-
-// функция будет вызвана автоматически, когда встретит класс, который не был ранее загружен
 function __autoload($class)
 {
-    // логика поиска файлов для класса
-    require 'classes/' . $class . '.php';
+    $classDirs = ['functions', 'models', 'views', 'controllers',];
+
+    foreach ($classDirs as $classDir) {
+
+        if(is_readable($classDir . '/' . $class . '.php')) {
+            require $classDir . '/' . $class . '.php';
+        }
+    }
+
 }
 
-require_once __DIR__ . '/models/Article.php';

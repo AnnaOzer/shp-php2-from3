@@ -23,4 +23,4 @@ class NewsController
         $view->display('views/one_newsarticle.php');
 
     }
-} 
+}
