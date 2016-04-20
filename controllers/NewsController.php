@@ -65,6 +65,34 @@ class NewsController
         header('Location:/?r=news/all');
 
     }
+
+    protected function actionCreate()
+    {
+        $newsArticle = new NewsArticle();
+        $view = new View();
+
+        echo $view->display('views/add_newsarticle_form.php');
+    }
+
+    protected function actionSave()
+    {
+        $adding_newsarticle = [];
+
+        if(!empty($_POST)) {
+            if(isset($_POST['text'])) {
+                $adding_newsarticle['text'] = $_POST['text'];
+
+                $adding_newsarticle['author'] = isset($_POST['author']) ? $_POST['author'] : 'Anonymous';
+
+                $adding_newsarticle['title'] = isset($_POST['title']) ? $_POST['title'] : 'Статья';
+
+                $newsarticle = new NewsArticle();
+                $newsarticle->insertOne($adding_newsarticle);
+            }
+        }
+
+        header('Location:./?r=news/all');
+    }
 }
 
 
