@@ -9,7 +9,7 @@ class NewsController
         $view = new View();
         $view->newsarticles = $newsArticle->getAll();
 
-        $view->display('views/index.php');
+        echo $view->display('views/index.php');
         // $view->display(__DIR__ . '/views/add_newsarticle_form.php');
 
     }
@@ -20,7 +20,7 @@ class NewsController
         $view = new View();
         $view->one_newsarticle = $newsArticle->getOne($_GET['id']);
 
-        $view->display('views/one_newsarticle.php');
+        echo $view->display('views/one_newsarticle.php');
 
     }
 }
