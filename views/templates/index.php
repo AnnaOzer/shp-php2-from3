@@ -18,6 +18,6 @@
         </div>
     </article>
 <?php endforeach; ?>
-<h3><a href="./?r=news/create">[Добавить статью]</a></h3>
+<h3><a href="../?r=news/create">[Добавить статью]</a></h3>
 </body>
 </html>
