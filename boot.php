@@ -2,7 +2,7 @@
 
 function __autoload($class)
 {
-    $classDirs = ['functions', 'models', 'views', 'controllers',];
+    $classDirs = ['functions', 'models', 'views', 'controllers', 'classes',];
 
     foreach ($classDirs as $classDir) {
 

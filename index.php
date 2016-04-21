@@ -2,18 +2,9 @@
 
 require __DIR__ . '/boot.php';
 
-// r=news/all
+$router = new Router($_GET['r']);
 
-// начало роутера
-$route = $_GET['r']; // код упрощён, проверок нет
-$routeParts = explode('/', $route);
-$controllerClassName = ucfirst($routeParts[0]).'Controller';
-$actionName= $routeParts[1];
-// конец роутера
+$controllerName = ucfirst($router->controller).'Controller';
+$controller = new $controllerName;
+$controller->action($router->action);
 
-// начало фронтконтроллера
-$controller = new $controllerClassName;
-$controller->action($actionName);
-// конец фронтконтроллера
-
-// смотреть на http://shp-php2-triple/?r=news/all
