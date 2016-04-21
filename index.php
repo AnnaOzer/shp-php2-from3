@@ -1,6 +1,6 @@
 <?php
 
-require 'boot.php';
+require __DIR__ . '/boot.php';
 
 // r=news/all
 

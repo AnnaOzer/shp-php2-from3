@@ -3,25 +3,28 @@
 class NewsController
     extends AController
 {
+    private $model;
+
+    private $view;
+
+    public function __construct()
+    {
+        $this->model = new NewsArticle();
+        $this->view = new View();
+    }
+
     protected function actionAll()
     {
-        $newsArticle = new NewsArticle();
-        $view = new View();
-        $view->newsarticles = $newsArticle->getAll();
-
-        echo $view->display('views/index.php');
-
+        $this->view->newsarticles = $this->model->getAll();
+        echo $this->view->display('views/index.php');
     }
 
     protected function actionOne()
     {
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
-        $newsArticle = new NewsArticle();
-        $view = new View();
-        $view->one_newsarticle = $newsArticle->getOne($id);
-
-        echo $view->display('views/one_newsarticle.php');
+        $this->view->one_newsarticle = $this->model->getOne($id);
+        echo $this->view->display('views/one_newsarticle.php');
 
     }
 
@@ -29,11 +32,8 @@ class NewsController
     {
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
-        $newsArticle = new NewsArticle();
-        $view = new View();
-        $view->updating_newsarticle = $newsArticle->getOne($id);
-
-        echo $view->display('views/update_newsarticle_form.php');
+        $this->view->updating_newsarticle = $this->model->getOne($id);
+        echo $this->view->display('views/update_newsarticle_form.php');
 
     }
 
@@ -42,8 +42,8 @@ class NewsController
         if(!empty($_POST)) {
             if(isset($_POST['id'])) {
                 $id = (int)$_POST['id'];
-                $newsarticle = new NewsArticle();
-                $updated_newsarticle = $newsarticle->getOne($id);
+
+                $updated_newsarticle = $this->model->getOne($id);
 
                 if(isset($_POST['title'])) {
                 $updated_newsarticle['title'] = $_POST['title'];
@@ -53,11 +53,12 @@ class NewsController
                 $updated_newsarticle['author'] = $_POST['author'];
                 }
 
+
                 if(isset($_POST['text'])) {
                 $updated_newsarticle['text'] = $_POST['text'];
                 }
 
-                $newsarticle->updateOne($updated_newsarticle);
+                $this->model->updateOne($updated_newsarticle);
 
             }
         }
@@ -68,10 +69,7 @@ class NewsController
 
     protected function actionCreate()
     {
-        $newsArticle = new NewsArticle();
-        $view = new View();
-
-        echo $view->display('views/add_newsarticle_form.php');
+        echo $this->view->display('views/add_newsarticle_form.php');
     }
 
     protected function actionSave()
@@ -86,8 +84,7 @@ class NewsController
 
                 $adding_newsarticle['title'] = isset($_POST['title']) ? $_POST['title'] : 'Статья';
 
-                $newsarticle = new NewsArticle();
-                $newsarticle->insertOne($adding_newsarticle);
+                $this->model->insertOne($adding_newsarticle);
             }
         }
 
@@ -96,12 +93,3 @@ class NewsController
 }
 
 
-/*
-
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
-
-$newsarticle = new NewsArticle;
-$one_newsarticle = $newsarticle->getOne($id);
-
-require '../views/one_newsarticle.php';
- * */

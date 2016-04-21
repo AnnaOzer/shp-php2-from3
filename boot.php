@@ -6,8 +6,12 @@ function __autoload($class)
 
     foreach ($classDirs as $classDir) {
 
-        if(is_readable($classDir . '/' . $class . '.php')) {
-            require $classDir . '/' . $class . '.php';
+        $classPath = __DIR__ . '/' . $classDir . '/' . $class . '.php';
+
+        if(is_readable($classPath)) {
+
+            require $classPath;
+            break;
         }
     }
 
