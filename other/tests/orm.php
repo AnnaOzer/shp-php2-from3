@@ -17,17 +17,13 @@ abstract class Model {
 
     static function findAll()
     {
-        try {
+
             $sql = 'SELECT * FROM ' . static::$table;
             $dbh = static::getConnection();
             $sth = $dbh->prepare($sql);
             $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
             $sth->execute();
             return $sth->fetchAll();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            die;
-        }
 
     }
 }
@@ -37,6 +33,9 @@ class News extends Model
     static protected $table = 'newsarticles';
 }
 
-var_dump(
-    News::findAll()
-);
+try {
+    $news = News::findAll();
+} catch (Exception $e) {
+    echo $e->getMessage();
+    die;
+}
