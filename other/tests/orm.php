@@ -6,7 +6,11 @@ abstract class Model {
 
     static function getConnection()
     {
-        // это упрощение, вообще здесь надо использовать config
+
+        if(true) {
+            throw new Exception('Что-то пошло не так!!!');
+        }
+
         $dsn = 'mysql:dbname=shp-php2-2;host=localhost';
         return new Pdo($dsn, 'root', '');
     }
