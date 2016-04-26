@@ -14,9 +14,9 @@ abstract class Model {
         $dsn = 'mysql:dbname=shp-php2-2;host=localhost';
         $dbh = new Pdo($dsn, 'root', '');
 
-        $sth = $dbh->prepare("SELECT * FROM newsarticles");
+        $sth = $dbh->prepare("SELECT * FROM newsarticles WHERE id=:id");
 
-        $sth->execute();
+        $sth->execute([':id' => 1]);
 
         $data = $sth->fetchAll();
         var_dump($data);
