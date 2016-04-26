@@ -19,7 +19,7 @@ abstract class Model {
         $sth->execute([':id' => 1]);
 
         $data = $sth->fetchObject();
-        var_dump($data);
+        echo $data->title;
     }
 }
 
