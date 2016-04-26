@@ -16,7 +16,7 @@ abstract class Model {
         $sql = 'SELECT * FROM ' . static::$table;
         $dbh = static::getConnection();
         $sth = $dbh->prepare($sql);
-        $sth->setFetchMode(PDO::FETCH_CLASS, 'News');
+        $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $sth->execute();
         return $sth->fetchAll();
 
