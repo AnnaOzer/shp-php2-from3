@@ -1,13 +1,19 @@
 <?php
 
+class ModelException extends Exception {}
+
 abstract class Model {
 
     static protected $table;
 
     static function getConnection()
     {
-        $dsn = 'mysql:dbname=shp-php2-2111;host=localhost';
-        return new Pdo($dsn, 'root', '');
+        try {
+            $dsn = 'mysql:dbname=shp-php2-2111;host=localhost';
+            return new Pdo($dsn, 'root', '');
+        } catch (PDOException $e) {
+            throw new ModelException('Ошибка при соединении');
+        }
     }
 
     static function findAll()
