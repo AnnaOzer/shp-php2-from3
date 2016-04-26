@@ -6,7 +6,7 @@ abstract class Model {
 
     static function getTableName()
     {
-         return self::$table;
+         return static::$table;
     }
 }
 
