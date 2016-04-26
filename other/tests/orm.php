@@ -16,6 +16,7 @@ abstract class Model {
         $sql = 'SELECT * FROM ' . static::$table;
         $dbh = static::getConnection();
         $sth = $dbh->prepare($sql);
+        $sth->execute();
 
     }
 }
