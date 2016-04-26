@@ -4,11 +4,6 @@ abstract class Model {
 
     static protected $table='123';
 
-    static function getTableName()
-    {
-         return static::$table;
-    }
-
     static function getConnection()
     {
         // это упрощение, вообще здесь надо использовать config
@@ -16,6 +11,10 @@ abstract class Model {
         return new Pdo($dsn, 'root', '');
     }
 
+    static function findAll()
+    {
+        $sql = 'SELECT * FROM ' . static::$table;
+    }
 }
 
 class News extends Model
