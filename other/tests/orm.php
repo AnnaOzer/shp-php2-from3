@@ -13,7 +13,9 @@ abstract class Model {
     {
         $dsn = 'mysql:dbname=shp-php2-2;host=localhost';
         $dbh = new Pdo($dsn, 'root', '');
-        var_dump($dbh);
+
+        $sth = $dbh->prepare("SELECT * FROM news");
+        var_dump($sth);
     }
 }
 
@@ -23,4 +25,4 @@ class News extends Model
 }
 
 
-$model = new News(); // object(PDO)#2 (0) { }
+$model = new News();
