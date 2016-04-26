@@ -2,7 +2,7 @@
 
 abstract class Model {
 
-    static protected $table='123';
+    static protected $table;
 
     static function getConnection()
     {
@@ -16,6 +16,7 @@ abstract class Model {
         $sql = 'SELECT * FROM ' . static::$table;
         $dbh = static::getConnection();
         $sth = $dbh->prepare($sql);
+        $sth->setFetchMode(PDO::FETCH_OBJ);
         $sth->execute();
         return $sth->fetchAll();
 
