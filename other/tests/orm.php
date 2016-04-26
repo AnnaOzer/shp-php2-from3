@@ -36,7 +36,7 @@ class News extends Model
 
 try {
     $news = News::findAll();
-} catch (Exception $e) {
+} catch (ModelException $e) {
     echo $e->getMessage();
     die;
 }
