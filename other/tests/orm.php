@@ -9,18 +9,13 @@ abstract class Model {
          return static::$table;
     }
 
-    public function __construct()
+    static function getConnection()
     {
+        // это упрощение, вообще здесь надо использовать config
         $dsn = 'mysql:dbname=shp-php2-2;host=localhost';
-        $dbh = new Pdo($dsn, 'root', '');
-
-        $sth = $dbh->prepare("SELECT * FROM newsarticles WHERE id=:id");
-
-        $sth->execute([':id' => 1]);
-
-        $data = $sth->fetchObject();
-        echo $data->title;
+        return new Pdo($dsn, 'root', '');
     }
+
 }
 
 class News extends Model
@@ -28,5 +23,3 @@ class News extends Model
     static protected $table = 'news';
 }
 
-
-$model = new News();
