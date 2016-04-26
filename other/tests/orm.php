@@ -18,7 +18,7 @@ abstract class Model {
 
         $sth->execute([':id' => 1]);
 
-        $data = $sth->fetch();
+        $data = $sth->fetchObject();
         var_dump($data);
     }
 }
