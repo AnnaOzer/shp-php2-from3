@@ -18,7 +18,7 @@ abstract class Model {
 
         $sth->execute([':id' => 1]);
 
-        $data = $sth->fetchAll(PDO::FETCH_CLASS);
+        $data = $sth->fetch();
         var_dump($data);
     }
 }
