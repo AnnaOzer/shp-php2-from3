@@ -17,12 +17,16 @@ abstract class Model {
         $dbh = static::getConnection();
         $sth = $dbh->prepare($sql);
         $sth->execute();
+        return $sth->fetchAll();
 
     }
 }
 
 class News extends Model
 {
-    static protected $table = 'news';
+    static protected $table = 'newsarticles';
 }
 
+var_dump(
+    News::findAll()
+);
