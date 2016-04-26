@@ -15,7 +15,8 @@ abstract class Model {
         $dbh = new Pdo($dsn, 'root', '');
 
         $sth = $dbh->prepare("SELECT * FROM news");
-        var_dump($sth);
+
+        $sth->execute();
     }
 }
 
