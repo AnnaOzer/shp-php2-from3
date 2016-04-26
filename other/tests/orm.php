@@ -8,12 +8,19 @@ abstract class Model {
     {
          return static::$table;
     }
+
+    public function __construct()
+    {
+        $dsn = 'mysql:dbname=shp-php2-2;host=localhost';
+        $dbh = new Pdo($dsn, 'root', '');
+        var_dump($dbh);
+    }
 }
 
 class News extends Model
 {
-    static public $table = 'news';
+    static protected $table = 'news';
 }
 
-echo News::getTableName();
-echo News::$table;
+
+$model = new News(); // object(PDO)#2 (0) { }
