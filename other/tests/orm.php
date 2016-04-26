@@ -14,6 +14,7 @@ abstract class Model {
     static function findAll()
     {
         $sql = 'SELECT * FROM ' . static::$table;
+        $dbh = static::getConnection();
     }
 }
 
