@@ -6,12 +6,7 @@ abstract class Model {
 
     static function getConnection()
     {
-
-        if(true) {
-            throw new Exception('Что-то пошло не так!!!');
-        }
-
-        $dsn = 'mysql:dbname=shp-php2-2;host=localhost';
+        $dsn = 'mysql:dbname=shp-php2-2111;host=localhost';
         return new Pdo($dsn, 'root', '');
     }
 
@@ -39,3 +34,5 @@ try {
     echo $e->getMessage();
     die;
 }
+
+// SQLSTATE[HY000] [1049] Unknown database 'shp-php2-2111'
