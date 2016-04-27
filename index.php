@@ -8,3 +8,6 @@ $controllerName = ucfirst($router->controller).'Controller';
 $controller = new $controllerName;
 $controller->action($router->action);
 
+?><hr><?php
+
+echo News::getTableName();
