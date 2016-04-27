@@ -11,3 +11,8 @@ $controller->action($router->action);
 ?><hr><?php
 
 echo News::getTableName();
+
+?><hr><?php
+
+$connection = new DbConnection();
+var_dump($connection);
