@@ -13,14 +13,14 @@ abstract class AbstractModel
     {
         $sql = "SELECT * FROM " . static::getTableName();
         $connection = new DbConnection();
-        return $connection->query($sql);
+        return $connection->toExecute($sql)->fetchAll();
     }
 
     static function findByPk($id)
     {
-        $sql = "SELECT * FROM " . static::getTableName();
+        $sql = "SELECT * FROM " . static::getTableName() . " WHERE id=:id";
         $connection = new DbConnection();
-        return $connection->queryOne($sql, [':id' => $id]);
+        return $connection->toExecute($sql, [':id' => $id])->fetch();
     }
 
 }

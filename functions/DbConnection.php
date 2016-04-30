@@ -2,38 +2,31 @@
 
 class DbConnection {
 
-    private $config;
-    public $dbh;
+    protected $pdo;
 
-    public function query($sql, $params=[])
+    static function config()
     {
-        $sth = $this->dbh->prepare($sql);
-        $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-        $sth->execute($params);
-        return $sth->fetchAll();
-    }
-
-    public function queryOne($sql, $params=[])
-    {
-        $sth = $this->dbh->prepare($sql);
-        $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-        $sth->execute($params);
-        return $sth->fetch();
-    }
-
-    public function queryExec($sql, $params=[])
-    {
-        $sth = $this->dbh->prepare($sql);
-        return $sth->execute($params);
+        return include __DIR__ . "/../config.php";
     }
 
     public function __construct()
     {
-        $config = new GetConfig;
-        $this->config = $config->getConfig();
+        $config = self::config();
+        $dsn = $config['db']['engine'] . ':dbname=' . $config['db']['dbname'] . ';host=' . $config['db']['host'];
+        $this->pdo = new PDO($dsn, $config['db']['user'], $config['db']['password']);
+    }
 
-        $dsn = $this->config['db']['engine'] . ':dbname=' . $this->config['db']['dbname'] . ';host=' . $this->config['db']['host'];
-        $this->dbh = new PDO($dsn, $this->config['db']['user'], $this->config['db']['password']);
+    public function toPrepare($query)
+    {
+        $statement = $this->pdo->prepare($query);
+        $statement->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $statement;
+    }
 
+    public function toExecute($query, array $parameters = [])
+    {
+        $statement = $this->toPrepare($query);
+        $statement->execute($parameters);
+        return $statement;
     }
 } 
