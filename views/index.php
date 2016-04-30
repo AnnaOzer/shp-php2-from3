@@ -6,15 +6,19 @@
 </head>
 <body>
 <h1>Все новости</h1>
-<?php foreach($newsarticles as $newsarticle):?>
+<?php
+// var_dump($newsarticles);
+
+?>
+<?php foreach($newsarticles as $newsarticle1):?>
     <article>
         <header>
-            <h1><?php echo $newsarticle['title']; ?></h1>
-            <h3><?php echo $newsarticle['author']; ?></h3>
+            <h1><?php echo $newsarticle1['title']; ?></h1>
+            <h3><?php echo $newsarticle1['author']; ?></h3>
         </header>
-        <div><?php echo $newsarticle['text']; ?>
-            <a href="/?r=news/one&id=<?php echo $newsarticle['id']; ?>">[Показывать одну эту новость]</a>
-            <a href="/?r=news/edit&id=<?php echo $newsarticle['id']; ?>">[Редактировать эту новость]</a>
+        <div><?php echo $newsarticle1['text']; ?>
+            <a href="/?r=news/one&id=<?php echo $newsarticle1['id']; ?>">[Показывать одну эту новость]</a>
+            <a href="/?r=news/edit&id=<?php echo $newsarticle1['id']; ?>">[Редактировать эту новость]</a>
         </div>
     </article>
 <?php endforeach; ?>

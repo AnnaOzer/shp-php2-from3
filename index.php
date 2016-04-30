@@ -10,17 +10,3 @@ $controller->action($router->action);
 
 ?><hr><?php
 
-echo News::getTableName();
-
-?><hr><?php
-
-$connection = new DbConnection();
-var_dump($news = $connection->query("SELECT * FROM newsarticles"));
-
-?><hr><?php
-$news = $connection->queryOne("SELECT * FROM newsarticles WHERE id=:id", [':id' => 5]);
-var_dump($news);
-
-?><hr><?php
-$result=$connection->queryExec("INSERT INTO newsarticles (title, text, author) VALUES ('Название211', 'Текст211', 'Автор211' )");
-var_dump($result);

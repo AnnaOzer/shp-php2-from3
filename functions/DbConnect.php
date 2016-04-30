@@ -19,7 +19,7 @@ class DbConnect
         return $ret;
     }
 
-    public function dbQueryOne($sql)
+    public function queryOne($sql)
     {
         return $this->dbQuery($sql)[0];
     }

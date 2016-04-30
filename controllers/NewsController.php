@@ -9,13 +9,13 @@ class NewsController
 
     public function __construct()
     {
-        $this->model = new NewsArticle();
+        $this->model = new News();
         $this->view = new View();
     }
 
     protected function actionAll()
     {
-        $this->view->newsarticles = $this->model->getAll();
+        $this->view->newsarticles = $this->model->findAll();
         echo $this->view->display('views/index.php');
     }
 
@@ -23,7 +23,7 @@ class NewsController
     {
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
-        $this->view->one_newsarticle = $this->model->getOne($id);
+        $this->view->one_newsarticle = $this->model->findByPk($id);
         echo $this->view->display('views/one_newsarticle.php');
 
     }
@@ -32,7 +32,7 @@ class NewsController
     {
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
-        $this->view->updating_newsarticle = $this->model->getOne($id);
+        $this->view->updating_newsarticle = $this->model->findByPk($id);
         echo $this->view->display('views/update_newsarticle_form.php');
 
     }
@@ -43,7 +43,7 @@ class NewsController
             if(isset($_POST['id'])) {
                 $id = (int)$_POST['id'];
 
-                $updated_newsarticle = $this->model->getOne($id);
+                $updated_newsarticle = $this->model->findByPk($id);
 
                 if(isset($_POST['title'])) {
                 $updated_newsarticle['title'] = $_POST['title'];
