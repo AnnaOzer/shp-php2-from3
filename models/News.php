@@ -12,7 +12,7 @@ class News
         $connection = new DbConnection();
         return $connection->toExecute(
             $sql,
-            [':id'=>$item['id'], ':title'=>$item['title'], ':author'=>$item['author'], ':text'=>$item['text']]
+            [':id'=>$item->id, ':title'=>$item->title, ':author'=>$item->author, ':text'=>$item->text]
         );
     }
 

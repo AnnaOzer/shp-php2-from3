@@ -46,16 +46,16 @@ class NewsController
                 $updated_newsarticle = $this->model->findByPk($id);
 
                 if(isset($_POST['title'])) {
-                $updated_newsarticle['title'] = $_POST['title'];
+                $updated_newsarticle->title = $_POST['title'];
                 }
 
                 if(isset($_POST['author'])) {
-                $updated_newsarticle['author'] = $_POST['author'];
+                $updated_newsarticle->author = $_POST['author'];
                 }
 
 
                 if(isset($_POST['text'])) {
-                $updated_newsarticle['text'] = $_POST['text'];
+                $updated_newsarticle->text = $_POST['text'];
                 }
 
                 $this->model->updateOne($updated_newsarticle);
