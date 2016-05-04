@@ -11,9 +11,14 @@ class DbConnection {
 
     public function __construct()
     {
-        $config = self::config();
-        $dsn = $config['db']['engine'] . ':dbname=' . $config['db']['dbname'] . ';host=' . $config['db']['host'];
-        $this->pdo = new PDO($dsn, $config['db']['user'], $config['db']['password']);
+        try {
+            $config = self::config();
+            $dsn = $config['db']['engine'] . ':dbname=' . $config['db']['dbname'] . ';host=' . $config['db']['host'];
+            $this->pdo = new PDO($dsn, $config['db']['user'], $config['db']['password']);
+        } catch (PDOException $e){
+            echo "Error: " . $e->getMessage();
+            die;
+        }
     }
 
     public function toPrepare($query)
