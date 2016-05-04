@@ -38,8 +38,6 @@ abstract class Model {
 
     }
 
-    public $isNew = true;
-
     public function save()
     {
         $tokens = [];
@@ -49,7 +47,8 @@ abstract class Model {
             $values[':' . $column] = $this->$column;
         }
 
-        if($this->isNew) {
+        if(!isset($this->id)) {
+
             $sql = 'INSERT INTO ' . static::$table . '
             (' . implode(', ', static::$columns) . ')
              VALUES
@@ -58,6 +57,20 @@ abstract class Model {
             $sth = $dbh->prepare($sql);
             $sth->execute($values);
             $this->id = $dbh->lastInsertId();
+
+        } else {
+
+            $columns = [];
+            foreach (static::$columns as $column) {
+                $columns[] = $column . '=:' . $column;
+            }
+            $sql = 'UPDATE ' . static::$table . '
+            SET ' . implode(',' , $columns) . '
+            WHERE id=:id
+            ';
+            $dbh = static::getConnection();
+            $sth = $dbh->prepare($sql);
+            $sth->execute([':id' =>$this->id] + $values); // массивы в php можно складывать
         }
     }
 }
@@ -69,6 +82,7 @@ class News extends Model
 }
 
 $article = News::findByPk(21);
-
+$article->title = 'СУПЕР НОВОСТЬ!!!';
+$article->save();
 
 var_dump($article);
