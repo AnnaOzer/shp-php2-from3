@@ -6,6 +6,8 @@ abstract class Model {
 
     static protected $table;
 
+    static protected $columns = [];
+
     static function getConnection()
     {
         $dsn = 'mysql:dbname=shp-php2-2;host=localhost';
@@ -24,17 +26,35 @@ abstract class Model {
 
     }
 
+    public $isNew = true;
+
     public function save()
     {
+        $tokens = [];
+        $values = [];
+        foreach (static::$columns as $column) {
+            $tokens[] = ':' . $column;
+            $values[] = $this->$column;
+        }
 
+        if($this->isNew) {
+            $sql = 'INSERT INTO ' . static::$table . '
+            (' . implode(', ', static::$columns) . ')
+            VALUES
+            (' . implode(',' $tokens)')';
+        }
     }
 }
 
 class News extends Model
 {
     static protected $table = 'newsarticles';
+    static protected $columns = ['title', 'author', 'text'];
 }
 
 $article = new News;
 $article->title = 'Новая новость';
+$article->text = 'Её текст';
 $article->save();
+
+var_dump($article->id);
