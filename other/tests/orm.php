@@ -14,7 +14,7 @@ abstract class Model {
         return new Pdo($dsn, 'root', '');
     }
 
-    static function findAll()
+    static public function findAll()
     {
 
             $sql = 'SELECT * FROM ' . static::$table;
@@ -26,7 +26,7 @@ abstract class Model {
 
     }
 
-    static function findByPk($id)
+    static public function findByPk($id)
     {
 
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
@@ -47,13 +47,14 @@ abstract class Model {
             $values[':' . $column] = $this->$column;
         }
 
+        $dbh = static::getConnection();
+
         if(!isset($this->id)) {
 
             $sql = 'INSERT INTO ' . static::$table . '
             (' . implode(', ', static::$columns) . ')
              VALUES
             (' . implode(', ', $tokens). ')';
-            $dbh = static::getConnection();
             $sth = $dbh->prepare($sql);
             $sth->execute($values);
             $this->id = $dbh->lastInsertId();
@@ -68,7 +69,6 @@ abstract class Model {
             SET ' . implode(',' , $columns) . '
             WHERE id=:id
             ';
-            $dbh = static::getConnection();
             $sth = $dbh->prepare($sql);
             $sth->execute([':id' =>$this->id] + $values); // массивы в php можно складывать
         }
@@ -82,7 +82,7 @@ class News extends Model
 }
 
 $article = News::findByPk(21);
-$article->title = 'СУПЕР НОВОСТЬ!!!';
+$article->title = 'СУПЕР НОВОСТЬ 123 !!!';
 $article->save();
 
 var_dump($article);
