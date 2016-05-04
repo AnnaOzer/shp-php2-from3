@@ -34,14 +34,18 @@ abstract class Model {
         $values = [];
         foreach (static::$columns as $column) {
             $tokens[] = ':' . $column;
-            $values[] = $this->$column;
+            $values[':' . $column] = $this->$column;
         }
 
         if($this->isNew) {
             $sql = 'INSERT INTO ' . static::$table . '
             (' . implode(', ', static::$columns) . ')
-            VALUES
-            (' . implode(',' $tokens)')';
+             VALUES
+            (' . implode(', ', $tokens). ')';
+            $dbh = static::getConnection();
+            $sth = $dbh->prepare($sql);
+            $sth->execute($values);
+            die('STOP');
         }
     }
 }
