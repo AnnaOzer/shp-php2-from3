@@ -8,12 +8,8 @@ abstract class Model {
 
     static function getConnection()
     {
-        try {
-            $dsn = 'mysql:dbname=shp-php2-2111;host=localhost';
-            return new Pdo($dsn, 'root', '');
-        } catch (PDOException $e) {
-            throw new ModelException('Ошибка при соединении');
-        }
+        $dsn = 'mysql:dbname=shp-php2-2;host=localhost';
+        return new Pdo($dsn, 'root', '');
     }
 
     static function findAll()
@@ -27,6 +23,11 @@ abstract class Model {
             return $sth->fetchAll();
 
     }
+
+    public function save()
+    {
+
+    }
 }
 
 class News extends Model
@@ -34,11 +35,6 @@ class News extends Model
     static protected $table = 'newsarticles';
 }
 
-try {
-    $news = News::findAll();
-} catch (ModelException $e) {
-    echo $e->getMessage();
-    die;
-}
-
-// SQLSTATE[HY000] [1049] Unknown database 'shp-php2-2111'
+$article = new News;
+$article->title = 'Новая новость';
+$article->save();
