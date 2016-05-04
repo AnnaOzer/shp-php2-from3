@@ -26,6 +26,18 @@ abstract class Model {
 
     }
 
+    static function findByPk($id)
+    {
+
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
+        $dbh = static::getConnection();
+        $sth = $dbh->prepare($sql);
+        $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        $sth->execute([':id'=>$id]);
+        return $sth->fetch();
+
+    }
+
     public $isNew = true;
 
     public function save()
@@ -45,7 +57,7 @@ abstract class Model {
             $dbh = static::getConnection();
             $sth = $dbh->prepare($sql);
             $sth->execute($values);
-            die('STOP');
+            $this->id = $dbh->lastInsertId();
         }
     }
 }
@@ -56,9 +68,7 @@ class News extends Model
     static protected $columns = ['title', 'author', 'text'];
 }
 
-$article = new News;
-$article->title = 'Новая новость';
-$article->text = 'Её текст';
-$article->save();
+$article = News::findByPk(21);
 
-var_dump($article->id);
+
+var_dump($article);
