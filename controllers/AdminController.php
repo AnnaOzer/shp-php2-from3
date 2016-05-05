@@ -31,7 +31,7 @@ class AdminController
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
         $this->view->one_newsarticle = $this->model->findByPk($id);
-        echo $this->view->display('views/one_newsarticle.php');
+        echo $this->view->display('views/admin_one_newsarticle.php');
 
     }
 
@@ -40,7 +40,7 @@ class AdminController
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
         $this->view->updating_newsarticle = $this->model->findByPk($id);
-        echo $this->view->display('views/update_newsarticle_form.php');
+        echo $this->view->display('views/admin_update_newsarticle_form.php');
 
     }
 
@@ -95,7 +95,7 @@ class AdminController
             }
         }
 
-        header('Location:./?r=admin/all');
+        header('Location:/?r=admin/all');
     }
 
     protected function actionDelete()
