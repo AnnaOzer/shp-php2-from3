@@ -17,9 +17,9 @@
             <h3><?php echo $newsarticle1->author; ?></h3>
         </header>
         <div><?php echo $newsarticle1->text; ?>
-            <a href="/?r=news/one&id=<?php echo $newsarticle1->id; ?>">[Показывать одну эту новость]</a>
-            <a href="/?r=news/edit&id=<?php echo $newsarticle1->id; ?>">[Редактировать эту новость]</a>
-            <a href="/?r=news/delete&id=<?php echo $newsarticle1->id; ?>">[Удалить эту новость]</a>
+            <a href="/?r=admin/one&id=<?php echo $newsarticle1->id; ?>">[Показывать одну эту новость]</a>
+            <a href="/?r=admin/edit&id=<?php echo $newsarticle1->id; ?>">[Редактировать эту новость]</a>
+            <a href="/?r=admin/delete&id=<?php echo $newsarticle1->id; ?>">[Удалить эту новость]</a>
         </div>
     </article>
 <?php endforeach; ?>

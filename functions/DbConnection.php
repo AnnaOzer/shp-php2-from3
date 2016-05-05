@@ -9,6 +9,10 @@ class DbConnection {
         return include __DIR__ . "/../config.php";
     }
 
+    public function pdo() {
+        return $this->pdo;
+    }
+
     public function __construct()
     {
         try {
@@ -21,17 +25,11 @@ class DbConnection {
         }
     }
 
-    public function toPrepare($query)
+    public function query($sql, $params=[])
     {
-        $statement = $this->pdo->prepare($query);
-        $statement->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-        return $statement;
+        $sth = $this->pdo->prepare($sql);
+        $sth->execute($params);
+        return $sth;
     }
 
-    public function toExecute($query, array $parameters = [])
-    {
-        $statement = $this->toPrepare($query);
-        $statement->execute($parameters);
-        return $statement;
-    }
-} 
+}

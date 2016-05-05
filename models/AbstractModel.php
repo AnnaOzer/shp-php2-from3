@@ -9,14 +9,16 @@ abstract class AbstractModel
     {
         $sql = "SELECT * FROM " . static::$table;
         $connection = new DbConnection();
-        return $connection->toExecute($sql)->fetchAll();
+        return $connection->query($sql)->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
 
     static function findByPk($id)
     {
         $sql = "SELECT * FROM " . static::$table . " WHERE id=:id";
         $connection = new DbConnection();
-        return $connection->toExecute($sql, [':id' => $id])->fetch();
+        $sth = $connection->query($sql, [':id' => $id]);
+        $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $sth->fetch();
     }
 
     public function save()
@@ -28,7 +30,7 @@ abstract class AbstractModel
             $values[':' . $column] = $this->$column;
         }
 
-        $dbh = static::getConnection();
+        $connection = new DbConnection();
 
         if(!isset($this->id)) {
 
@@ -36,9 +38,8 @@ abstract class AbstractModel
             (' . implode(', ', static::$columns) . ')
              VALUES
             (' . implode(', ', $tokens). ')';
-            $sth = $dbh->prepare($sql);
-            $sth->execute($values);
-            $this->id = $dbh->lastInsertId();
+            $connection->query($sql, $values);
+            $this->id = $connection->pdo()->lastInsertId();
 
         } else {
 
@@ -50,8 +51,29 @@ abstract class AbstractModel
             SET ' . implode(',' , $columns) . '
             WHERE id=:id
             ';
-            $sth = $dbh->prepare($sql);
-            $sth->execute([':id' =>$this->id] + $values); // массивы в php можно складывать
+            $connection->query($sql, [':id' =>$this->id] + $values);
+
         }
     }
+
+    public function deleteOne()
+    {
+        $connection = new DbConnection();
+
+        if(!isset($this->id)) {
+
+            throw new Exception('Попытка удалить несуществующую запись');
+
+        } else {
+            $id= $this->id;
+
+            $sql = 'DELETE FROM ' . static::$table . '
+                   WHERE id=:id
+            ';
+            $connection->query($sql, [':id'=>$id]);
+        }
+    }
+
+
 }
+

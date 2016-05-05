@@ -1,8 +1,15 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Пользователь
+ * Date: 04.05.2016
+ * Time: 22:18
+ */
 
-class NewsController
+class AdminController
     extends AController
 {
+
     private $model;
 
     private $view;
@@ -16,7 +23,7 @@ class NewsController
     protected function actionAll()
     {
         $this->view->newsarticles = $this->model->findAll();
-        echo $this->view->display('views/index.php');
+        echo $this->view->display('views/admin.php');
     }
 
     protected function actionOne()
@@ -46,16 +53,16 @@ class NewsController
                 $updated_newsarticle = $this->model->findByPk($id);
 
                 if(isset($_POST['title'])) {
-                $updated_newsarticle->title = $_POST['title'];
+                    $updated_newsarticle->title = $_POST['title'];
                 }
 
                 if(isset($_POST['author'])) {
-                $updated_newsarticle->author = $_POST['author'];
+                    $updated_newsarticle->author = $_POST['author'];
                 }
 
 
                 if(isset($_POST['text'])) {
-                $updated_newsarticle->text = $_POST['text'];
+                    $updated_newsarticle->text = $_POST['text'];
                 }
 
                 $updated_newsarticle->save();
@@ -63,7 +70,7 @@ class NewsController
             }
         }
 
-        header('Location:/?r=news/all');
+        header('Location:/?r=admin/all');
 
     }
 
@@ -88,8 +95,19 @@ class NewsController
             }
         }
 
-        header('Location:./?r=news/all');
+        header('Location:./?r=admin/all');
     }
-}
 
+    protected function actionDelete()
+    {
 
+        if(!empty($_GET['id'])) {
+            $id = $_GET['id'];
+            $toDelete = News::findByPk($id);
+
+            $toDelete->deleteOne();
+
+        }
+        header('Location:/?r=admin/all');
+    }
+} 
