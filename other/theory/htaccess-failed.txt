@@ -3,7 +3,7 @@
 RewriteEngine On
 RewriteBase /
 RewriteCondition %{REQUEST_FILENAME} !-f
-RewriteCondition %{REQUEST _FILENAME} !-d
+RewriteCondition %{REQUEST_FILENAME} !-d
 RewriteRule (.*) index.php?__route=$1
 
 простой и работает
@@ -27,3 +27,19 @@ RewriteBase /
 RewriteCondition %{REQUEST_FILENAME} !-f
 RewriteCondition %{REQUEST _FILENAME} !-d
 RewriteRule (.*) index.php?__r=$1 [L,QSA]
+
+проверка - не работает
+
+RewriteEngine On
+RewriteBase /
+RewriteCondition %{REQUEST_FILENAME} !-f
+RewriteCondition %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?r=$1
+
+проверка - не работает
+
+RewriteEngine On
+RewriteBase /
+RewriteCondition %{REQUEST_FILENAME} !-f
+RewriteCondition %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?r=$1 [L,QSA]
