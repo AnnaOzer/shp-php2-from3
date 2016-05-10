@@ -10,5 +10,7 @@ $controller->action($router->action);
 
 ?><hr><?php
 
+var_dump($_GET); // array(1) { ["__r"]=> string(9) "index.php" }
+
 
 
